@@ -35,7 +35,7 @@ Once you have everything installed, it should just be one simple step to get eve
 
 ```bash
 # cd into the src folder
-cd ms-resources
+cd ms_resources
 # run migrations to setup the database
 python3 manage.py migrate
 # run the the server
@@ -63,4 +63,10 @@ http://localhost:8000
 - [ ] Includes database migrations in each app
 - [ ] README with documentation
 - [x] Public Github Repo
-- [ ] No exposed secrets
+- [x] No exposed secrets
+
+## Built With
+-   [Django](https://www.djangoproject.com/) - For pretty much everything
+-   [python-dotenv](https://pypi.org/project/python-dotenv/) - To keep secrets secret
+-   [djangorestframework](https://www.django-rest-framework.org/) - For the API
+-   [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) - To keep the forms crispy
