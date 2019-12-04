@@ -66,7 +66,8 @@ http://localhost:8000
 - [x] No exposed secrets
 
 ## Built With
--   [Django](https://www.djangoproject.com/) - For pretty much everything
--   [python-dotenv](https://pypi.org/project/python-dotenv/) - To keep secrets secret
--   [djangorestframework](https://www.django-rest-framework.org/) - For the API
--   [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) - To keep the forms crispy
+
+- [Django](https://www.djangoproject.com/) - For pretty much everything
+- [python-dotenv](https://pypi.org/project/python-dotenv/) - To keep secrets secret
+- [djangorestframework](https://www.django-rest-framework.org/) - For the API
+- [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) - To keep the forms crispy
