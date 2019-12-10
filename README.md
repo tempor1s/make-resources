@@ -35,7 +35,7 @@ Once you have everything installed, it should just be one simple step to get eve
 
 ```bash
 # cd into the src folder
-cd ms_resources
+cd make_resources
 # run migrations to setup the database
 python3 manage.py migrate
 # run the the server

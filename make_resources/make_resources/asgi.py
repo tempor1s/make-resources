@@ -1,5 +1,5 @@
 """
-ASGI config for ms_resources project.
+ASGI config for make_resources project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ms_resources.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'make_resources.settings')
 
 application = get_asgi_application()
