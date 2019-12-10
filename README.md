@@ -31,13 +31,20 @@ Congrats you should now have a working install of Make Resources
 
 If you have not yet followed the installation steps, go and do so before continuing.
 
-Once you have everything installed, it should just be one simple step to get everything up and running!
+Once you have everything installed, you need to create a `.env` file in the root of the directory.
 
 ```bash
 # cd into the src folder
 cd make_resources
-# run migrations to setup the database
-python3 manage.py migrate
+# rename .env.example to .env
+mv .env.example .env
+# populate the .env file with correct data
+vim .env
+```
+
+Once you have renamed the `.env` file and populated it with correct data, all you need to do is run the server!
+
+```bash
 # run the the server
 python3 manage.py runserver
 # navigate to the url to see your running application!
