@@ -1,6 +1,6 @@
 # 📚 Make Resources
 
-## [Deployed Version](https://example.com)
+## [Deployed Version](https://make-resources.herokuapp.com)
 
 ## 🚀 Getting Started
 
@@ -59,7 +59,7 @@ http://localhost:8000
 - [ ] Template-based front-end interface
 - [ ] Has purpose and fulfills purpose
 - [ ] Integrates an open source app
-- [ ] Deployed and usable
+- [x] Deployed and usable
 - [ ] Includes database migrations in each app
 - [ ] README with documentation
 - [x] Public Github Repo
