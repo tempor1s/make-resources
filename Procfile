@@ -1,1 +1,1 @@
-web: gunicorn make_resources.make_resources.wsgi --log-file -
+web: gunicorn make_resources.wsgi --log-file -
