@@ -31,7 +31,7 @@ Congrats you should now have a working install of Make Resources
 
 If you have not yet followed the installation steps, go and do so before continuing.
 
-Once you have everything installed, you need to create a `.env` file in the root of the directory.
+Once you have everything installed, you need to rename `.env.example` to `.env` and populate the fields with real data.
 
 ```bash
 # cd into the src folder
