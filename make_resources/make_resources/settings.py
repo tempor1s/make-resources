@@ -25,8 +25,7 @@ SECRET_KEY = '2b5oihpib=i$f^yzxqkrb6+a#j7vk83tdnscg1-r52#%2pfer4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', 'make-resources.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -37,6 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # External application
+    'rest_framework',  # Django Rest Framework
+    'crispy_forms',  # For Cripsy forms
+
+    # My applications
+    'tweets',  # For everything tweet related
+    'users'  # For things that are user related like Profiles
 ]
 
 MIDDLEWARE = [
@@ -105,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
@@ -118,3 +125,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# TODO: This might break due to how my directories work
+STATIC_ROOT = os.path.join(BASE_DIR, 'make_resources/staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'make_resources/static')
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/make_resources/media/'
+
+# Required for Heroku
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# For login/logout
+LOGIN_REDIRECT_URL = '/home'
+LOGOUT_REDIRECT_URL = ''
+DEFAULT_LOGOUT_URL = ''
+
+# For crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstap'
