@@ -59,7 +59,7 @@ http://localhost:8000
 - [ ] Template-based front-end interface
 - [ ] Has purpose and fulfills purpose
 - [ ] Integrates an open source app
-- [ ] Deplyed and usable
+- [ ] Deployed and usable
 - [ ] Includes database migrations in each app
 - [ ] README with documentation
 - [x] Public Github Repo
