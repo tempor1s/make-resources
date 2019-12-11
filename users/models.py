@@ -5,7 +5,7 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(default='pfp.jpg', upload_to='images/profile_pictures')
+    profile_picture = models.ImageField(default='pfp.jpg', upload_to='profile_pictures')
 
     def __str__(self):
         return self.user.username
@@ -25,10 +25,10 @@ class Profile(models.Model):
         super().save()
 
         img = Image.open(self.profile_picture.path)
-        if img.height > 300 or img.weight > 300:
+        if img.height > 300 or img.width > 300:
             # Save the image as 300px x 300px
             img.thumbnail((300, 300))
-            img.save(self.image.path)
+            img.save(self.profile.path)
 
 
 class Follower(models.Model):
