@@ -36,4 +36,5 @@ urlpatterns = [
 
 # for static files in debug mode
 if settings.DEBUG is True:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # for css, js, and other static files
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # for profile pictures and other 'media'
