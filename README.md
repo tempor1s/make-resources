@@ -67,7 +67,7 @@ http://localhost:8000
 - [ ] Has purpose and fulfills purpose
 - [x] Integrates an open source app
 - [x] Deployed and usable
-- [ ] Includes database migrations in each app (1/2)
+- [x] Includes database migrations in each app
 - [x] README with documentation
 - [x] Public Github Repo
 - [x] No exposed secrets
