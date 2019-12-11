@@ -8,7 +8,7 @@ class Profile(models.Model):
     profile_picture = models.ImageField(default='pfp.jpg', upload_to='images/profile_pictures')
 
     def __str__(self):
-        returns self.user.username
+        return self.user.username
 
     @property
     def followers(self):
@@ -31,7 +31,7 @@ class Profile(models.Model):
             img.save(self.image.path)
 
 
-class Followers(models.Model):
+class Follower(models.Model):
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     following_user = models.ForeignKey(User, related_name='following_user', on_delete=models.CASCADE)
     date_followed = models.DateTimeField(auto_now_add=True)
