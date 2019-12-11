@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h3>
+        {{ header }}
+    </h3>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            Do you really want to delete the following tweet:
+        </fieldset>
+        <p>
+            {{ post.content }}
+        </p>
+        <div class="form-group">
+            <button class="btn btn-primary">Delete</button>
+        </div>
+    </form>
+{% endblock content %}
