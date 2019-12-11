@@ -12,6 +12,8 @@ python-dotenv = "*"
 djangorestframework = "*"
 django-crispy-forms = "*"
 gunicorn = "*"
+pil = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
