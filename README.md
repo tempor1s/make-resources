@@ -42,7 +42,7 @@ mv .env.example .env
 vim .env
 ```
 
-Once you have renamed the `.env` file and populated it with correct data, all you need to do is run the server!
+Once you have renamed the `.env` file and populate it with correct data, all you need to do is run the server!
 
 ```bash
 # run the the server
