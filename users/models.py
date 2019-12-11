@@ -13,12 +13,12 @@ class Profile(models.Model):
     @property
     def followers(self):
         # returns a count of the followers this profile has
-        return Followers.objects.filter(following_user=self.user).count()
+        return Follower.objects.filter(following_user=self.user).count()
     
     @property
     def following(self):
         # returns the count of people this user is following
-        return Followers.objects.filter(user=self.user).count()
+        return Follower.objects.filter(user=self.user).count()
     
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         # TODO: Document
