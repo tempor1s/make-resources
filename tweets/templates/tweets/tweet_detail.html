@@ -7,6 +7,7 @@
     <p>Author: {{ tweet.author }}</p>
     {% if tweet.author == user %}
         <a href="{% url 'delete-tweet' tweet.id %}">delete tweet</a>
+        <a href="{% url 'edit-tweet' tweet.id %}">edit tweet</a>
     {% endif %}
     <br>
     <h4>Content</h4>
@@ -36,4 +37,5 @@
             </div>
         </form>
     {% endif %}
+    <a href="{% url 'home' %}">Back to home</a>
 {% endblock content %}

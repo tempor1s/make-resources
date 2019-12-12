@@ -2,18 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h3>
-        {{ header }}
+        Edit tweet
     </h3>
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            Do you really want to delete the following tweet:
+            {{ form | crispy }}
         </fieldset>
-        <p>
-            {{ tweet.content }}
-        </p>
         <div class="form-group">
-            <button class="btn btn-primary">Delete</button>
+            <button class="btn btn-primary">Confirm edits</button>
         </div>
     </form>
     <a href="{% url 'tweet-detail' tweet.id %}">Back to tweet</a>

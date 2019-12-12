@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from tweets.models import Tweet, Reply
 from users.models import Follower, Profile
 from django.contrib.auth.models import User
@@ -19,10 +20,6 @@ def index(request):
     return render(request, 'tweets/index.html', context={})
 
 
-def home(request):
-    return render(request, 'tweets/home.html', context={})
-
-
 class ComposeTweet(LoginRequiredMixin, CreateView):
     model = Tweet
     fields = ['content']
@@ -33,11 +30,6 @@ class ComposeTweet(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['header'] = 'Compose a new tweet'
-        return data
-
 
 class DeleteTweet(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Tweet
@@ -46,6 +38,23 @@ class DeleteTweet(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     context_object_name = 'tweet'
 
     def test_func(self, **kwargs):
+        return is_logged_user(self.get_object().author, self.request.user)
+
+
+class EditTweet(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Tweet
+    fields = ['content']
+    template_name = 'tweets/edit_tweet.html'
+    success_url = '/home'
+
+    def get_success_url(self):
+        return reversed
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
         return is_logged_user(self.get_object().author, self.request.user)
 
 

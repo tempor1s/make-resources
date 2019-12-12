@@ -13,11 +13,11 @@
     {% endif %}
 
     {% if user_profile != None %}
-        <p>Followers: {{ user_profile.profile.followers }}</p>
-        <p>Following: {{ user_profile.profile.folllwing }}</p>
+        <p><a href="{% url 'followers' user_profile.profile.username %}">Followers: </a> {{ user_profile.profile.followers }}</p>
+        <p><a href="{% url 'following' user_profile.profile.username %}">Following: </a> {{ user_profile.profile.folllowing }}</p>
     {% else %}
-        <p>Followers: {{ user.profile.followers }}</p>
-        <p>Following: {{ user.profile.folllwing }}</p>
+        <p><a href="{% url 'followers' user.username %}">Followers: </a> {{ user.profile.followers }}</p>
+        <p><a href="{% url 'following' user.username %}">Following: </a> {{ user.profile.folllowing }}</p>
     {% endif %}
     <!-- TODO: Add link to edit profile once I add that -->
     <h3>
@@ -27,6 +27,8 @@
         <p>Tweet Author: {{ tweet.author }}</p>
         {% if tweet.author == user %}
             <a href="{% url 'delete-tweet' tweet.id %}">delete tweet</a>
+            <a href="{% url 'tweet-detail' tweet.id %}">view tweet</a>
+            <a href="{% url 'edit-tweet' tweet.id %}">edit tweet</a>
         {% endif %}
         <p>Tweet Content: {{ tweet.content }}</p>
         <p>Number for Comments: {{ tweet.comber_of_comments }}</p>
