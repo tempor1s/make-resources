@@ -69,3 +69,36 @@ class TweetDetail(LoginRequiredMixin, DetailView):
         new_reply.save()
 
         return self.get(self, request, *args, **kwargs)
+
+
+# class AllTweets(LoginRequiredMixin, ListView):
+#     model = Tweet
+#     template_name = 'tweets/all_tweets.html'
+#     context_object_name = 'tweets'
+#     ordering = ['-date_posted']
+#     paginate_by = 20
+
+
+class TweetList(LoginRequiredMixin, ListView):
+    model = Tweet
+    template_name = 'tweets/home.html'
+    context_object_name = 'tweets'
+    ordering = ['-date_posted']
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        data_counter = Tweet.objects.values('author').annotate(author_count=Count('author')).order_by('-author_count')[:5]
+
+        data['all_users'] = [User.objects.filter(pk=aux['author']).first() for aux in data_counter]
+        return data
+
+    def get_queryset(self):
+        user = self.request.user
+        query_set = Follower.objects.filter(user=user)
+        followers = [user]
+        for obj in query_set:
+            followers.append(obj.following_user)
+        
+        return Tweet.objects.filter(author__in=followers).order_by('-date_posted')
