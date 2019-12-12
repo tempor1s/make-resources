@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if follow_type == 'following' %}
+        <h3>
+            Following
+        </h3>
+        {% for follow in following %}
+            {{ follow.following_user.username }}
+        {% endfor %}
+    {% endif %}
+    
+    {% if follow_type == 'followers' %}
+        <h3>
+            Followers
+        </h3>
+        {% for follow in followers %}
+            {{ follow.user.username }}
+        {% endfor %}
+    {% endif %}
+{% endblock content %}

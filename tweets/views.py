@@ -102,3 +102,39 @@ class TweetList(LoginRequiredMixin, ListView):
             followers.append(obj.following_user)
         
         return Tweet.objects.filter(author__in=followers).order_by('-date_posted')
+    
+
+class FollowingList(ListView):
+    model = Follower
+    template_name = 'tweets/follow_page.html'
+    context_object_name = 'following'
+
+    def visable_user(self):
+        return get_object_or_404(User, username=self.kwargs.get('username'))
+    
+    def get_queryset(self):
+        user = self.visable_user()
+        return Follower.objects.filter(user=user).order_by('-date_followed')
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['follow_type'] = 'following'
+        return data
+
+
+class FollowersList(ListView):
+    model = Follower
+    template_name = 'tweets/follow_page.html'
+    context_object_name = 'followers'
+
+    def visable_user(self):
+        return get_object_or_404(User, username=self.kwargs.get('username'))
+
+    def get_queryset(self):
+        user = self.visable_user()
+        return Follower.objects.filter(following_user=user).order_by('-date_followed')
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['follow_type'] = 'followers'
+        return data
