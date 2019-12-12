@@ -1,14 +1,16 @@
+from django.db.models.signals import post_save
+
+from django.dispatch import receiver
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
-
+from PIL import Image # for image processing
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(default='pfp.jpg', upload_to='profile_pictures')
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Profile'
 
     @property
     def followers(self):
@@ -29,7 +31,15 @@ class Profile(models.Model):
             # Save the image as 300px x 300px
             img.thumbnail((300, 300))
             img.save(self.profile.path)
+        
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
 
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class Follower(models.Model):
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)

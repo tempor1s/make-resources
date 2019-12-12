@@ -14,10 +14,10 @@
 
     {% if user_profile != None %}
         <p><a href="{% url 'followers' user_profile.profile.username %}">Followers: </a> {{ user_profile.profile.followers }}</p>
-        <p><a href="{% url 'following' user_profile.profile.username %}">Following: </a> {{ user_profile.profile.folllowing }}</p>
+        <p><a href="{% url 'following' user_profile.profile.username %}">Following: </a> {{ user_profile.profile.following }}</p>
     {% else %}
         <p><a href="{% url 'followers' user.username %}">Followers: </a> {{ user.profile.followers }}</p>
-        <p><a href="{% url 'following' user.username %}">Following: </a> {{ user.profile.folllowing }}</p>
+        <p><a href="{% url 'following' user.username %}">Following: </a> {{ user.profile.following }}</p>
     {% endif %}
     <!-- TODO: Add link to edit profile once I add that -->
     <h3>

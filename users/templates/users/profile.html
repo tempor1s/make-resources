@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h3>Change profile information</h3>
+    <form>
+        {% csrf_token %}
+        <fieldset>
+            {{ user_form | crispy }}
+            {{ profile_form | crispy }}
+        </fieldset>
+        <button class="btn btn-primary" type="submit">Update profile</button>
+    </form>
+{% endblock content %}
