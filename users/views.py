@@ -9,7 +9,6 @@ from users.models import Profile
 
 
 @login_required
-@transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
