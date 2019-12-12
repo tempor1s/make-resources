@@ -6,12 +6,15 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count
 
+from tweets.forms import NewReplyForm  # new reply form (tweet response)
+
 # helper func to make sure that the post's user is the logged in user, so that people can not delete/edit other users tweet
+
+
 def is_logged_user(post_user, logged_user):
     return post_user == logged_user
 
-# Create your views here.
-# TODO: Turn all of these into Modals
+
 def index(request):
     return render(request, 'tweets/index.html', context={})
 
@@ -44,3 +47,25 @@ class DeleteTweet(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self, **kwargs):
         return is_logged_user(self.get_object().author, self.request.user)
+
+
+class TweetDetail(LoginRequiredMixin, DetailView):
+    model = Tweet
+    template_name = 'tweets/tweet_detail.html'
+    context_object_name = 'tweet'
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        replies = Reply.objects.filter(
+            tweet_connected=self.get_object()).order_by('-date_posted')
+        data['replies'] = replies
+        data['form'] = NewReplyForm(instance=self.request.user)
+        return data
+
+    def post(self, request, *args, **kwargs):
+        new_reply = Reply(content=request.POST.get('content'),
+                          author=self.request.user,
+                          tweet_connected=self.get_object())
+        new_reply.save()
+
+        return self.get(self, request, *args, **kwargs)

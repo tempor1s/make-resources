@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h3>
+        Tweet
+    </h3>
+    <p>Author: {{ tweet.author }}</p>
+    {% if tweet.author == user %}
+        <a href="{% url 'delete-tweet' tweet.id %}">delete tweet</a>
+    {% endif %}
+    <br>
+    <h4>Content</h4>
+    <p>{{ tweet.content }}</p>
+    <br>
+    <p>Date Posted:</p>
+    <p>{{ tweet.date_posted | date:"H:i l, d.m.y" }}</p>
+
+    <h3>
+        Replies
+    </h3>
+    {% for reply in replies %}
+        {{ reply.author }}
+        {{ reply.content }}
+        {{ reply.date_posted | date:"H:i l, d.m.y" }}
+    {% endfor %}
+
+    {% if user is not None %}
+        <h4>Add a reply</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Submit reply</button>
+            </div>
+        </form>
+    {% endif %}
+{% endblock content %}
