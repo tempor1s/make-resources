@@ -1,6 +1,6 @@
 # 📚 Make Resources
 
-## [Deployed Version](https://make-resources.herokuapp.com)
+## [Deployed Version](http://54.163.44.100:8000/) - Hosted on AWS :)
 
 ## 🚀 Getting Started
 
