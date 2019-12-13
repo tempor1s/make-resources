@@ -1,5 +1,4 @@
 from django.views.generic import CreateView
-from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from users.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required

@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %} {% block content %}
+<!-- TODO: I have it split currently with multiple ifs for easier styling -->
+<div class="row">
+    <div class="col">
+        <!-- TODO: Fix these hrefs -->
+        <h3>
+            Profile
+        </h3>
+        {% if user_profile != None %}
+        <p>Username: {{ user_profile.username }}</p>
+        <p>Email: {{ user_profile.email }}</p>
+        {% else %}
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        {% endif %} 
+        {% if user_profile != None %}
+        <p>
+            <a href="#"
+                >Followers:
+            </a>
+            {{ user_profile.profile.followers }}
+        </p>
+        <p>
+            <a href="#"
+                >Following:
+            </a>
+            {{ user_profile.profile.following }}
+        </p>
+        {% else %}
+        <p>
+            <a href="#">Followers: </a> 
+            {{ user.profile.followers }}
+        </p>
+        <p>
+            <a href="#">Following: </a> 
+            {{ user.profile.following }}
+        </p>
+        {% endif %} {% if user_profile == None %}
+        <a href="{% url 'profile' %}">Settings</a>
+        {% endif %}
+    </div>
+    <div class="col">
+        <h3>
+            Tweets
+        </h3>
+        {% for tweet in tweets %}
+        <p>Tweet Author: {{ tweet.author }}</p>
+        {% if tweet.author == user %}
+        <a href="{% url 'delete-tweet' tweet.id %}">delete tweet</a><br>
+        <a href="{% url 'tweet-detail' tweet.id %}">view tweet</a><br>
+        <a href="{% url 'edit-tweet' tweet.id %}">edit tweet</a><br>
+        {% endif %}
+        <p>Tweet Content: {{ tweet.content }}</p>
+        <p>Number for Comments: {{ tweet.reply_count }}</p>
+        <p>Post Date: {{ tweet.date_posted | date:"H:i, l, d.m.y" }}</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,23 +1,38 @@
-{% extends 'base/base.html' %}
-{% load crispy_forms_tags %}
-{% block content %}
-    {% if follow_type == 'following' %}
-        <h3>
-            Following
-        </h3>
-        {% for follow in following %}
-            {{ follow.following_user.username }}
-        {% endfor %}
-    {% endif %}
-    
-    {% if follow_type == 'followers' %}
-        <h3>
-            Followers
-        </h3>
-        {% for follow in followers %}
-            {{ follow.user.username }}
-        {% endfor %}
-    {% endif %}
+{% extends 'base/base.html' %} {% load crispy_forms_tags %} {% block content %}
+{% if follow_type == 'following' %}
+<h3>
+    Following
+</h3>
+{% for follow in following %}
+<img
+    class="rounded-circle mr-2"
+    style="width: 20px; height: 20px;"
+    src="{{ follow.follow_user.profile.image.url }}"
+/>
+<a
+    class="mr-2 white-important"
+    href="{% url 'user-tweet-list' follow.follow_user.username %}"
+>
+    {{ follow.follow_user.username }}
+</a>
+{% endfor %} {% endif %} {% if follow_type == 'followers' %}
+<h3>
+    Followers
+</h3>
+{% for follow in followers %}
+<div>
+    <img
+        class="rounded-circle mr-2"
+        style="width: 20px; height: 20px;"
+        src="{{ follow.user.profile.profile_picture.url }}"
+    />
+    <a
+        class="mr-2 white-important"
+        href="{% url 'user-tweet-list' follow.user.username %}"
+    >
+        {{ follow.user.username }}
+    </a>
+</div>
+{% endfor %} {% endif %}
 
-    <br><a href="{% url 'home' %}">Back to home</a>
-{% endblock content %}
+<br /><a href="{% url 'home' %}">Back to home</a> {% endblock content %}

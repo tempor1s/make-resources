@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
 from tweets.models import Tweet, Reply
-from users.models import Follower, Profile
+from users.models import Profile, Follower
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -49,9 +48,6 @@ class EditTweet(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ['content']
     template_name = 'tweets/edit_tweet.html'
     success_url = '/home'
-
-    def get_success_url(self):
-        return reversed
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -114,6 +110,49 @@ class TweetList(LoginRequiredMixin, ListView):
             followers.append(obj.following_user)
         
         return Tweet.objects.filter(author__in=followers).order_by('-date_posted')
+
+
+class UserTweetList(LoginRequiredMixin, ListView):
+    model = Tweet
+    template_name = 'tweets/user_tweets.html'
+    context_object_name = 'tweets'
+    paginate_by = 10
+
+    def visable_user(self):
+        return get_object_or_404(User, username=self.kwargs.get('username'))
+    
+    def get_context_data(self, **kwargs):
+        visable_user = self.visable_user()
+        logged_user = self.request.user
+
+        if logged_user.username == '' or logged_user is None:
+            can_follow = False
+        else:
+            can_follow = (Follower.objects.filter(user=logged_user, following_user=visable_user).count() == 0)
+        
+        data = super().get_context_data(**kwargs)
+
+        data['user_profile'] = visable_user
+        data['can_follow'] = can_follow
+        return data
+    
+    def get_queryset(self):
+        user = self.visable_user()
+        return Tweet.objects.filter(author=user).order_by('-date_posted')
+    
+    def post(self, request, *args, **kwargs):
+        if request.user.id is not None:
+            follows_between = Follower.object.filter(user=request.user, follow_user=self.visable_user())
+        
+            if 'follow' in request.POST:
+                new_relation = Follower(user=request.user, follow_user=self.visable_user())
+                if follows_between.count() == 0:
+                    new_relation.save()
+            elif 'unfollow' in request.POST:
+                if follows_between.count() > 0:
+                    follows_between.delete()
+                
+        return self.get(self, request, *args, **kwargs)
     
 
 class FollowingList(ListView):
