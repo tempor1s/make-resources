@@ -52,7 +52,7 @@ class EditTweet(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    
+
     def test_func(self):
         return is_logged_user(self.get_object().author, self.request.user)
 
@@ -97,18 +97,21 @@ class TweetList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
-        data_counter = Tweet.objects.values('author').annotate(author_count=Count('author')).order_by('-author_count')[:5]
+        data_counter = Tweet.objects.values('author').annotate(
+            author_count=Count('author')).order_by('-author_count')[:5]
 
-        data['all_users'] = [User.objects.filter(pk=aux['author']).first() for aux in data_counter]
+        data['all_users'] = [User.objects.filter(
+            pk=aux['author']).first() for aux in data_counter]
         return data
 
     def get_queryset(self):
         user = self.request.user
+
         query_set = Follower.objects.filter(user=user)
         followers = [user]
         for obj in query_set:
             followers.append(obj.following_user)
-        
+
         return Tweet.objects.filter(author__in=followers).order_by('-date_posted')
 
 
@@ -120,7 +123,7 @@ class UserTweetList(LoginRequiredMixin, ListView):
 
     def visable_user(self):
         return get_object_or_404(User, username=self.kwargs.get('username'))
-    
+
     def get_context_data(self, **kwargs):
         visable_user = self.visable_user()
         logged_user = self.request.user
@@ -128,32 +131,35 @@ class UserTweetList(LoginRequiredMixin, ListView):
         if logged_user.username == '' or logged_user is None:
             can_follow = False
         else:
-            can_follow = (Follower.objects.filter(user=logged_user, following_user=visable_user).count() == 0)
-        
+            can_follow = (Follower.objects.filter(
+                user=logged_user, following_user=visable_user).count() == 0)
+
         data = super().get_context_data(**kwargs)
 
         data['user_profile'] = visable_user
         data['can_follow'] = can_follow
         return data
-    
+
     def get_queryset(self):
         user = self.visable_user()
         return Tweet.objects.filter(author=user).order_by('-date_posted')
-    
+
     def post(self, request, *args, **kwargs):
         if request.user.id is not None:
-            follows_between = Follower.object.filter(user=request.user, follow_user=self.visable_user())
-        
+            follows_between = Follower.object.filter(
+                user=request.user, follow_user=self.visable_user())
+
             if 'follow' in request.POST:
-                new_relation = Follower(user=request.user, follow_user=self.visable_user())
+                new_relation = Follower(
+                    user=request.user, follow_user=self.visable_user())
                 if follows_between.count() == 0:
                     new_relation.save()
             elif 'unfollow' in request.POST:
                 if follows_between.count() > 0:
                     follows_between.delete()
-                
+
         return self.get(self, request, *args, **kwargs)
-    
+
 
 class FollowingList(ListView):
     model = Follower
@@ -162,11 +168,11 @@ class FollowingList(ListView):
 
     def visable_user(self):
         return get_object_or_404(User, username=self.kwargs.get('username'))
-    
+
     def get_queryset(self):
         user = self.visable_user()
         return Follower.objects.filter(user=user).order_by('-date_followed')
-    
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['follow_type'] = 'following'

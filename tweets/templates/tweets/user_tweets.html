@@ -13,31 +13,24 @@
         {% else %}
         <p>Username: {{ user.username }}</p>
         <p>Email: {{ user.email }}</p>
-        {% endif %} 
-        {% if user_profile != None %}
+        {% endif %} {% if user_profile != None %}
         <p>
-            <a href="#"
-                >Followers:
-            </a>
+            <a href="#">Followers: </a>
             {{ user_profile.profile.followers }}
         </p>
         <p>
-            <a href="#"
-                >Following:
-            </a>
+            <a href="#">Following: </a>
             {{ user_profile.profile.following }}
         </p>
         {% else %}
         <p>
-            <a href="#">Followers: </a> 
+            <a href="#">Followers: </a>
             {{ user.profile.followers }}
         </p>
         <p>
-            <a href="#">Following: </a> 
+            <a href="#">Following: </a>
             {{ user.profile.following }}
         </p>
-        {% endif %} {% if user_profile == None %}
-        <a href="{% url 'profile' %}">Settings</a>
         {% endif %}
     </div>
     <div class="col">
@@ -47,9 +40,9 @@
         {% for tweet in tweets %}
         <p>Tweet Author: {{ tweet.author }}</p>
         {% if tweet.author == user %}
-        <a href="{% url 'delete-tweet' tweet.id %}">delete tweet</a><br>
-        <a href="{% url 'tweet-detail' tweet.id %}">view tweet</a><br>
-        <a href="{% url 'edit-tweet' tweet.id %}">edit tweet</a><br>
+        <a href="{% url 'delete-tweet' tweet.id %}">delete tweet</a><br />
+        <a href="{% url 'tweet-detail' tweet.id %}">view tweet</a><br />
+        <a href="{% url 'edit-tweet' tweet.id %}">edit tweet</a><br />
         {% endif %}
         <p>Tweet Content: {{ tweet.content }}</p>
         <p>Number for Comments: {{ tweet.reply_count }}</p>
@@ -57,5 +50,4 @@
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}
