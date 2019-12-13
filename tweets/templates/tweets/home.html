@@ -19,7 +19,11 @@
         <p><a href="{% url 'followers' user.username %}">Followers: </a> {{ user.profile.followers }}</p>
         <p><a href="{% url 'following' user.username %}">Following: </a> {{ user.profile.following }}</p>
     {% endif %}
-    <!-- TODO: Add link to edit profile once I add that -->
+    
+    {% if user_profile == None %}
+        <a href="{% url 'profile' %}">Settings</a>
+    {% endif %}
+
     <h3>
         Tweets
     </h3>
@@ -31,7 +35,7 @@
             <a href="{% url 'edit-tweet' tweet.id %}">edit tweet</a>
         {% endif %}
         <p>Tweet Content: {{ tweet.content }}</p>
-        <p>Number for Comments: {{ tweet.comber_of_comments }}</p>
+        <p>Number for Comments: {{ tweet.reply_count }}</p>
         <p>Post Date: {{ tweet.date_posted | date:"H:i, l, d.m.y" }}</p>
     {% endfor %}
 

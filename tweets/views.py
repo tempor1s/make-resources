@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from tweets.models import Tweet, Reply
 from users.models import Follower, Profile
@@ -17,6 +17,9 @@ def is_logged_user(post_user, logged_user):
 
 
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     return render(request, 'tweets/index.html', context={})
 
 

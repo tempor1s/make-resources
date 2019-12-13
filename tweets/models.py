@@ -12,7 +12,7 @@ class Tweet(models.Model):
     
     @property
     def reply_count(self):
-        return Reply.objects.filter(post_connected=self).count()
+        return Reply.objects.filter(tweet_connected=self).count()
 
 # TODO: Eventally just turn replies into individual tweets, but this will be easier for now
 class Reply(models.Model):

@@ -4,7 +4,7 @@ from tweets import views
 from tweets.views import ComposeTweet, DeleteTweet, TweetDetail, TweetList, FollowersList, FollowingList, EditTweet
 
 urlpatterns = [
-    path('', views.index, name='homepage'),
+    path('', views.index, name='index'),
     path('home/', TweetList.as_view(), name='home'),
     path('tweet/compose/', ComposeTweet.as_view(), name='compose-tweet'),
     path('tweet/<int:pk>/', TweetDetail.as_view(), name='tweet-detail'),

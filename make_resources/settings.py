@@ -141,10 +141,8 @@ MEDIA_URL = '/media/'
 # Required for Heroku
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# For login/logout
+# For login
 LOGIN_REDIRECT_URL = '/home'
-LOGOUT_REDIRECT_URL = ''
-DEFAULT_LOGOUT_URL = ''
 
 # For crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap'
