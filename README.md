@@ -60,7 +60,7 @@ http://localhost:8000
 ### Requirements
 
 - [x] At least 2 apps in project
-- [ ] At least 2 tests in tests.py in each app
+- [x] At least 2 tests in tests.py in each app
 - [x] Modular design
 - [ ] RESTful API using Django Rest Framework
 - [x] Template-based front-end interface
