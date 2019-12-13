@@ -9,7 +9,6 @@ autopep8 = "*"
 [packages]
 django = "*"
 python-dotenv = "*"
-djangorestframework = "*"
 django-crispy-forms = "*"
 gunicorn = "*"
 pillow = "*"

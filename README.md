@@ -64,7 +64,7 @@ http://localhost:8000
 - [x] Modular design
 - [ ] RESTful API using Django Rest Framework
 - [x] Template-based front-end interface
-- [ ] Has purpose and fulfills purpose
+- [x] Has purpose and fulfills purpose
 - [x] Integrates an open source app
 - [x] Deployed and usable
 - [x] Includes database migrations in each app
@@ -76,7 +76,6 @@ http://localhost:8000
 
 - [Django](https://www.djangoproject.com/) - For pretty much everything
 - [python-dotenv](https://pypi.org/project/python-dotenv/) - To keep secrets secret
-- [djangorestframework](https://www.django-rest-framework.org/) - For the API
 - [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) - To keep the forms crispy
 - [pillow](https://pillow.readthedocs.io/en/stable/) - For easy profile picture resizing
 - [gunicorn](https://gunicorn.org/) - For easy deployment to Heroku

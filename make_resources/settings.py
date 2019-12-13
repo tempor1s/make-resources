@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # External application
-    'rest_framework',  # Django Rest Framework
     'crispy_forms',  # For Cripsy forms
 
     # My applications

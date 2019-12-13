@@ -22,8 +22,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    # Api
-    path('api/', include('api.urls')),
     # Admin Site
     path('admin/', admin.site.urls),
     # Use Tweet Application for / route.
