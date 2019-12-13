@@ -44,15 +44,19 @@
             Tweets
         </h3>
         {% for tweet in tweets %}
-            <p>Tweet Author: {{ tweet.author }}</p>
-            {% if tweet.author == user %}
-                <a href="{% url 'delete-tweet' tweet.id %}">delete tweet</a><br>
-                <a href="{% url 'tweet-detail' tweet.id %}">view tweet</a><br>
-                <a href="{% url 'edit-tweet' tweet.id %}">edit tweet</a><br>
-            {% endif %}
-                <p>Tweet Content: {{ tweet.content }}</p>
-                <p>Number for Comments: {{ tweet.reply_count }}</p>
-                <p>Post Date: {{ tweet.date_posted | date:"H:i, l, d.m.y" }}</p>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ tweet.author }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ tweet.date_posted | date:"H:i, d.m.y" }}</h6>
+                <p class="card-text">{{ tweet.content }}</p>
+                <a href="{% url 'tweet-detail' tweet.id %}" class="card-link"><p>Comments: {{ tweet.reply_count }}</a>
+                <a href="{% url 'tweet-detail' tweet.id %}" class="card-link">view tweet</a>
+                {% if tweet.author == user %}
+                    <a href="{% url 'delete-tweet' tweet.id %}" class="card-link">delete tweet</a>
+                    <a href="{% url 'edit-tweet' tweet.id %}" class="card-link">edit tweet</a>
+                {% endif %}
+            </div>
+        </div>
         {% endfor %}
     </div>
 </div>
