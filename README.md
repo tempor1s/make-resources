@@ -71,6 +71,7 @@ http://localhost:8000
 - [x] README with documentation
 - [x] Public Github Repo
 - [x] No exposed secrets
+- [x] Deployed on service other than heroku
 
 ## Built With
 
