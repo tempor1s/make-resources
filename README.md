@@ -38,11 +38,11 @@ Once you have everything installed, you need to rename `.env.example` to `.env` 
 cd make_resources
 # rename .env.example to .env
 mv .env.example .env
-# populate the .env file with correct data
+# populate the .env file with correct data using your favorite text editor!
 vim .env
 ```
 
-Once you have renamed the `.env` file and populate it with correct data, all you need to do is run the server!
+Once you have renamed the `.env` file and populated it with the correct data, all you need to do is run the server!
 
 ```bash
 # run the the server
